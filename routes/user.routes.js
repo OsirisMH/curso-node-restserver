@@ -8,7 +8,13 @@ const { getUser,
     patchUser
 } = require('../controllers/user.controller.js');
 
-const { fieldsValidator } = require('../middlewares/fields-validator.js');
+const {
+    fieldsValidator,
+    JWTValidator,
+    isAdminRole,
+    hasRole
+} = require('../middlewares');
+
 const { isValidRole, emailExists, userExistsById } = require('../helpers/db-validators.js');
 
 const router = Router();
@@ -33,6 +39,9 @@ router.post( '/', [
 ],postUser );
 
 router.delete( '/:id', [
+    JWTValidator,
+    // isAdminRole,
+    hasRole('ADMIN_ROLE', 'SELLS_ROLE', 'MAMALON_ROLE'),
     check('id', 'No es un ID válido').isMongoId(),
     check('id').custom( userExistsById ),
     fieldsValidator
