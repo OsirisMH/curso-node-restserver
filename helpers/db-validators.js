@@ -1,4 +1,4 @@
-const { Category, Role, User } = require("../models");
+const { Category, Product, Role, User } = require("../models");
 
 const isValidRole = async (role = '') => {
     const roleExists = await Role.findOne({ role });
@@ -28,9 +28,17 @@ const categoryExistsById = async ( id ) => {
     }
 };
 
+const productExistsById = async ( id ) => {
+    const productExists = await Product.findById( id );
+    if ( !productExists || !productExists.status ) {
+        throw new Error(`El id no existe o el registro fue eliminado`);
+    }
+};
+
 module.exports = {
     emailExists,
     categoryExistsById,
     isValidRole,
-    userExistsById
+    userExistsById,
+    productExistsById
 }

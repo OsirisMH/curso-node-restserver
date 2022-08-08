@@ -33,7 +33,7 @@ router.get('/:id', [
 router.post('/', [
   JWTValidator,
   check('name', 'El nombre es obligatorio').not().isEmpty(),
-  check('id').custom( categoryExistsById ),
+  // check('id').custom( categoryExistsById ),
   fieldsValidator
 ], createCategory);
 
