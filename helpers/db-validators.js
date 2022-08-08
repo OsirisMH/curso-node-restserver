@@ -35,10 +35,25 @@ const productExistsById = async ( id ) => {
     }
 };
 
+/**
+ * Validar colecciones permitidas
+ */
+
+const availableCollections = async ( collection, allowedCollections ) => {
+    const isInclude = allowedCollections.includes( collection );
+    
+    if ( !isInclude ) {
+        throw new Error(`La colección ${ collection } no está permitida. Las colecciones permitidas son: ${ allowedCollections }`);
+    }
+
+    return true;
+};
+
 module.exports = {
     emailExists,
     categoryExistsById,
     isValidRole,
     userExistsById,
-    productExistsById
+    productExistsById,
+    availableCollections
 }

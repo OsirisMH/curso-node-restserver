@@ -1,9 +1,11 @@
 const fieldsValidator = require('./fields-validator');
-const JWTValidator    = require('./jwt-validator.js');
-const roleValidator   = require('./role-validator.js');
+const fileValidator   = require('./file-validator');
+const JWTValidator    = require('./jwt-validator');
+const roleValidator   = require('./role-validator');
 
 module.exports = {
   ...fieldsValidator,
+  ...fileValidator,
   ...JWTValidator,
   ...roleValidator,
 }
